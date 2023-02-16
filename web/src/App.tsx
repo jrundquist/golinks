@@ -9,7 +9,7 @@ import './App.css'
 function App() {
   const currentUrl = React.useMemo(() => {
     return window.location.pathname.split('/')[1] ?? ''
-  }, [window.location.pathname])
+  }, [])
 
   const [alias, setAlias] = React.useState(currentUrl)
   const [url, setUrl] = React.useState('')
