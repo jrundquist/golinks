@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      target: development
+    image: golinks:dev
+    container_name: golinks-dev
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/data
+      - ./web/build:/app/build
+      - ./server.go:/app/server.go
