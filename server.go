@@ -42,8 +42,8 @@ func main() {
 	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS links (
 		alias TEXT PRIMARY KEY NOT NULL,
 		url TEXT,
-    created_time TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    num_visits INTEGER DEFAULT 0 NOT NULL
+		created_time TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+		num_visits INTEGER DEFAULT 0 NOT NULL
 	);`)
 	if err != nil {
 		panic(err)
