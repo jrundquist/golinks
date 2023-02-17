@@ -1,29 +1,79 @@
 import * as React from 'react'
 import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
+import { SearchBar } from './SearchBar'
+import {
+  Divider,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from '@mui/material'
 
-export default function ButtonAppBar() {
+import { Add, HelpCenter } from '@mui/icons-material'
+
+const drawerWidth = 240
+
+export default function GoLinkAppBar() {
+  const showAbout = React.useCallback(() => {
+    alert('todo')
+  }, [])
+
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <>
+      <AppBar
+        position="fixed"
+        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
+      >
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            {/* <MenuIcon /> */}
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Go Links
-          </Typography>
+          <SearchBar />
         </Toolbar>
       </AppBar>
-    </Box>
+      <Drawer
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: drawerWidth,
+            boxSizing: 'border-box',
+          },
+        }}
+        variant="permanent"
+        anchor="left"
+      >
+        <Toolbar>
+          <Typography variant="h4">GoLinks</Typography>
+        </Toolbar>
+        <Divider />
+        <List>
+          <ListItem key={'create'} disablePadding>
+            <ListItemButton selected={true}>
+              <ListItemIcon>
+                <Add />
+              </ListItemIcon>
+              <ListItemText primary={'Create New'} />
+            </ListItemButton>
+          </ListItem>
+        </List>
+        <Divider />
+        <List>
+          <ListItem key={'about'} disablePadding>
+            <ListItemButton onClick={showAbout}>
+              <ListItemIcon>
+                <HelpCenter />
+              </ListItemIcon>
+              <ListItemText primary={'About'} />
+            </ListItemButton>
+          </ListItem>
+        </List>
+        <Divider />
+        <Typography variant="caption" sx={{ p: 2 }}>
+          &copy; 2021 GoLinks
+        </Typography>
+      </Drawer>
+    </>
   )
 }
